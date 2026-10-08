@@ -1,0 +1,46 @@
+server:
+  port: 7070
+
+spring:
+  application:
+    name: spring-ai-mcp-client
+  ai:
+    openai:
+      api-key: ${OPEN_API_KEY}
+      base-url: ${OPEN_BASE_URL}
+      chat:
+        options:
+          model:  ${OPEN_MODEL}
+    vectorstore:
+      redis:
+        initialize-schema: true         # 是否初始化所需的模式
+        index-name: lee-vectorstore     # 用于存储向量的索引名称
+        prefix: 'embedding:'             # Redis 键的前缀
+    mcp:
+      client:
+        enabled: true
+        name: spring-ai-mcp-client
+        type: async
+        streamable-http:
+          connections:
+            server1:
+              url: https://mcp.amap.com
+              sse-endpoint: /sse?key=6d9258c5e0ced301dbe8aa20ebc25940
+        sse:
+          connections:
+            mcp-server:
+              url: http://127.0.0.1:9090
+              sse-endpoint: /sse
+        stdio:
+          servers-configuration: classpath:mcp.json
+logging:
+  level:
+    root: info
+website:
+  domain: http://127.0.0.1:5500/
+
+internet:
+  websearch:
+    searxng:
+      url: http://localhost:6080/search
+      counts: 10
