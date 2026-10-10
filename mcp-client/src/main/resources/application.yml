@@ -25,7 +25,7 @@ spring:
           connections:
             server1:
               url: https://mcp.amap.com
-              sse-endpoint: /sse?key=6d9258c5e0ced301dbe8aa20ebc25940
+              sse-endpoint: /sse?key=
         sse:
           connections:
             mcp-server:
